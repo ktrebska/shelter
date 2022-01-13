@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna schroniska</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="content">
+    <div th:each="dog : ${dogs}" class="dog">
+        <div th:text="${dog.name}" class="name"></div>
+        <div th:text="${dog.breed}" class="breed"></div>
+        <a th:if="${logged == true && dog.isAdoptable}" th:href="@{/requests/add/{id}(id=${dog.id})}">Złóż wniosek</a>
+    </div>
+</div>
+
+</body>
+</html>

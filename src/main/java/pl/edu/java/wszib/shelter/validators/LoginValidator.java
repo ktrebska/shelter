@@ -1,0 +1,17 @@
+package pl.edu.java.wszib.shelter.validators;
+
+import pl.edu.java.wszib.shelter.exceptions.AuthValidationException;
+
+public class LoginValidator {
+    public static void validateLogin(String login) {
+        if(login == null || login.length() <= 1) {
+            throw new AuthValidationException("Login incorrect");
+        }
+    }
+
+    public static void validatePass(String pass) {
+        if(pass == null || pass.length() <= 1) {
+            throw new AuthValidationException("Password incorrect");
+        }
+    }
+}

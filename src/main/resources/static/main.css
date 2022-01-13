@@ -1,0 +1,19 @@
+.dog {
+    border: 1px solid black;
+    margin: 10px;
+    width: 700px;
+    padding: 10px;
+}
+
+.dog .name {
+    font-size: 22px;
+}
+
+.dog .breed {
+    font-size: 18px;
+}
+
+.dog div {
+    margin: 10px;
+}
+

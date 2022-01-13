@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twoje wnioski adopcyjne</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div th:replace="fragments.html :: logo"></div>
+<div th:replace="fragments.html :: menu"></div>
+
+<div id="content">
+
+
+    <div th:each="dog: ${requests.getRequestList()}" class="dog">
+        <div th:text="${dog.name}" class="name"></div>
+        <div th:text="${dog.breed}" class="breed"></div>
+    </div>
+    <a href="/finishedrequest">Złóż wniosek</a>
+
+</div>
+
+
+
+</body>
+</html>
