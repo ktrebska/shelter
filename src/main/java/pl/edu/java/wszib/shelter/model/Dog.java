@@ -1,8 +1,16 @@
 package pl.edu.java.wszib.shelter.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "tdog")
 public class Dog {
     private String name;
     private String breed;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int age;
     private boolean isAdoptable;
@@ -13,6 +21,9 @@ public class Dog {
         this.id = id;
         this.age = age;
         this.isAdoptable = isAdoptable;
+    }
+
+    public Dog() {
     }
 
     public String getName() { return name; }

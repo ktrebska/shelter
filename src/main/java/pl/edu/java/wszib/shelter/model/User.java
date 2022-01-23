@@ -1,10 +1,17 @@
 package pl.edu.java.wszib.shelter.model;
 
+
+import javax.persistence.*;
+
+@Entity(name = "tuser")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     private String name;
     private String surname;
     private String login;
+    @Column(name = "password")
     private String pass;
 
     public User(int id, String name, String surname, String login, String pass) {

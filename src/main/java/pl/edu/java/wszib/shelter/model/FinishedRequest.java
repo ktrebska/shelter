@@ -1,18 +1,23 @@
 package pl.edu.java.wszib.shelter.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+@Entity(name = "tfinishedrequest")
 public class FinishedRequest {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+    @Enumerated(EnumType.STRING)
     private Status status;
-    private List<Dog> requestList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Dog> requestList = new HashSet<>();
     private LocalDateTime date;
 
-    public FinishedRequest(int id, User user, Status status, List<Dog> requestList, LocalDateTime date) {
+    public FinishedRequest(int id, User user, Status status, Set<Dog> requestList, LocalDateTime date) {
         this.id = id;
         this.user = user;
         this.status = status;
@@ -20,7 +25,7 @@ public class FinishedRequest {
         this.date = date;
     }
 
-    public FinishedRequest(User user, List<Dog> requestList) {
+    public FinishedRequest(User user, Set<Dog> requestList) {
         this.id = new Random().nextInt(1000000);
         this.user = user;
         this.status = Status.NEW;
@@ -55,7 +60,7 @@ public class FinishedRequest {
         this.status = status;
     }
 
-    public List<Dog> getRequestList() {
+    public Set<Dog> getRequestList() {
         return requestList;
     }
 

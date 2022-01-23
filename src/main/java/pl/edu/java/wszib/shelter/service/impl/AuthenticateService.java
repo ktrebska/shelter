@@ -3,9 +3,8 @@ package pl.edu.java.wszib.shelter.service.impl;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import pl.edu.java.wszib.shelter.database.Database;
+import pl.edu.java.wszib.shelter.database.IUserDAO;
 import pl.edu.java.wszib.shelter.exceptions.LoginAlreadyUseException;
 import pl.edu.java.wszib.shelter.model.User;
 import pl.edu.java.wszib.shelter.model.view.RegisterUser;
@@ -19,14 +18,14 @@ import java.util.Optional;
 public class AuthenticateService implements IAuthenticationService {
 
     @Autowired
-    Database database;
+    IUserDAO userDAO;
 
     @Resource
     SessionObject sessionObject;
 
     @Override
     public void authenticate(String login, String password) {
-        Optional<User> user = this.database.getUserByLogin(login);
+        Optional<User> user = this.userDAO.getUserByLogin(login);
 
         if(user.isEmpty() ||
                 !user.get().getPass().equals(DigestUtils.md5Hex(password))) {
@@ -37,13 +36,20 @@ public class AuthenticateService implements IAuthenticationService {
 
     @Override
     public void register(RegisterUser registerUser) {
-        Optional<User> userBox = this.database.getUserByLogin(registerUser.getLogin());
+        Optional<User> userBox = this.userDAO.getUserByLogin(registerUser.getLogin());
 
         if(userBox.isPresent()) {
             throw new LoginAlreadyUseException();
         }
 
         registerUser.setPass(DigestUtils.md5Hex(registerUser.getPass()));
-        this.database.addUser(registerUser);
+
+        User user = new User();
+        user.setLogin(registerUser.getLogin());
+        user.setPass(registerUser.getPass());
+        user.setSurname(registerUser.getSurname());
+        user.setName(registerUser.getName());
+
+        this.userDAO.addUser(user);
     }
 }
