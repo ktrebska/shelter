@@ -37,9 +37,9 @@ public class FinishedRequestService implements IFinishedRequestService {
         this.finishedRequestDAO.addFinishedRequest(finishedRequest);
 
         for (Dog dog : finishedRequest.getRequestList()) {
-            Optional<Dog> dogBox = this.dogDAO.getDogById(dog.getId());
-            dogBox.get().setAdoptable(false);
-            this.dogDAO.updateDog(dogBox.get());
+            Dog dogBox = this.dogDAO.getDogById(dog.getId());
+            dogBox.setAdoptable(false);
+            this.dogDAO.updateDog(dogBox);
         }
         this.sessionObject.getRequestList().clearRequestList();
     }

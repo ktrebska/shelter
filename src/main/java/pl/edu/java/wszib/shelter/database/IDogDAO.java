@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface IDogDAO {
     List<Dog> getDogs();
-    Optional<Dog> getDogById(int dogId);
+//    Optional<Dog> getDogById(int dogId);
+    Dog getDogById(int dogId);
     void updateDog(Dog dog);
 }

@@ -53,17 +53,17 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Optional<User> getUserById(int id) {
+    public User getUserById(int id) {
         Session session = this.sessionFactory.openSession();
         Query<User> query = session.createQuery("FROM pl.edu.java.wszib.shelter.model.User WHERE id = :id");
         query.setParameter("id", id);
         try {
             User user = query.getSingleResult();
             session.close();
-            return Optional.of(user);
+            return user;
         } catch (NoResultException e) {
             session.close();
-            return Optional.empty();
+            return null;
         }
     }
 }

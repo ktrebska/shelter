@@ -21,7 +21,7 @@ public class AdoptionService implements IAdoptionService {
     SessionObject sessionObject;
 
     public void requestDogAdoption (int dogId) {
-        Optional<Dog> dogBox = this.dogDAO.getDogById(dogId);
+        Optional<Dog> dogBox = Optional.ofNullable(this.dogDAO.getDogById(dogId));
 
         if(dogBox.isEmpty()) {
             return;

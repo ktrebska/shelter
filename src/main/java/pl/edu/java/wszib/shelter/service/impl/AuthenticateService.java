@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.java.wszib.shelter.database.IUserDAO;
 import pl.edu.java.wszib.shelter.exceptions.LoginAlreadyUseException;
+import pl.edu.java.wszib.shelter.model.Dog;
 import pl.edu.java.wszib.shelter.model.User;
 import pl.edu.java.wszib.shelter.model.view.RegisterUser;
 import pl.edu.java.wszib.shelter.service.IAuthenticationService;
@@ -51,5 +52,9 @@ public class AuthenticateService implements IAuthenticationService {
         user.setName(registerUser.getName());
 
         this.userDAO.addUser(user);
+    }
+
+    public User findUserById(Integer id){
+        return this.userDAO.getUserById(id);
     }
 }

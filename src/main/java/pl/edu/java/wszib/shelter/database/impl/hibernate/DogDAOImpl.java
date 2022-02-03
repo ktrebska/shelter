@@ -29,17 +29,17 @@ public class DogDAOImpl implements IDogDAO {
     }
 
     @Override
-    public Optional<Dog> getDogById(int dogId) {
+    public Dog getDogById(int dogId) {
         Session session = this.sessionFactory.openSession();
         Query<Dog> query = session.createQuery("FROM pl.edu.java.wszib.shelter.model.Dog WHERE id = :id");
         query.setParameter("id", dogId);
         try {
             Dog dog = query.getSingleResult();
             session.close();
-            return Optional.of(dog);
+            return dog;
         } catch (NoResultException e) {
             session.close();
-            return Optional.empty();
+            return null;
         }
     }
 
